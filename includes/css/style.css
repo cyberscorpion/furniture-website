@@ -1,15 +1,17 @@
+/*to apply the style of all elements of the page*/
 * {
     margin: 0px;
     padding: 0px;
     -webkit-box-sizing: inherit;
-    box-sizing: inherit;
+    box-sizing: border-box;
 
 }
 
+/*to change the font accourding to the screen size*/
 html {
     font-size: 62.5%
 }
-
+/*media queries*/
 @media only screen and (max-width: 37.5em) {
     html {
         font-size: 56.25%;
@@ -27,18 +29,24 @@ html {
         font-size: 75%
     }
 }
+
+/*body styling*/
 body{
     font-family: "Lato", sans-serif;   
+     --brown-color: #270202; /* to define the variable in css*/
 }
+
 header{
-/*    background-image: */
-    background-image: linear-gradient(to bottom,transparent 60%, white 90%),linear-gradient(to top left,transparent 60%, rgba(255, 255, 255, 0.77) 90%),url(../images/header-background.jpg);
-    widows: 100%;
+    background-image: linear-gradient(to bottom,transparent 60%, white 90%),linear-gradient(to top left,transparent 60%, rgba(255, 255, 255, 0.77) 90%),url(../images/header-background.jpg); /* applying different layers on background*/
+    width: 100%;
     background-position:bottom;
     background-size: cover;
     height: 90vh;
+    
 }
+/*main heading of the page*/
 .heading{
+    color: var(--brown-color);
     text-align: center;
     top: 75vh;
     position: absolute;
@@ -49,34 +57,38 @@ header{
     letter-spacing: .5rem;
     
 }
+/*sub heading*/
 .sub-heading{
     font-size: 2rem;
     font-weight: 300;
     position: relative;
     
 }
+/*top line to the sub heading using pseudo element*/
 .sub-heading:before{
     content: "";
     position: absolute;
-    
     height: 3rem;
     width: 40%;
     right: 0;
     top: -.4rem;
     transition: .6s;
-    border-top: 1px solid black;
-    
+    border-top: 1px solid var(--brown-color);  
 }
+
+/*bottom line to the sub heading using pseudo element*/
+
 .sub-heading:after{
     content: "";
     position: absolute;
-    
     height: 3rem;
     width: 50%;
     left:0;
-    border-bottom: 1.5px solid black;
+    border-bottom: 1.5px solid var(--brown-color);
     transition: .6s;
 }
+
+/*move the lines when heading is hovered*/
 .heading:hover .main-heading{
     letter-spacing: 1rem;
     transition: .6s ease-out;
@@ -95,65 +107,106 @@ header{
     width: 90%;
     left: 5%;
 }
+
+
+
+/*MAIN CONTENT OF THE PAGE*/
+
 main{
     width: 90%;
     margin: 0 auto;
 }
+
+
+/*STYLE WITH US*/
 .m1{
-    width: 90%;
+    width: 100%;
     height: 100vh;   
 }
 .m1__heading{
+    display: flex;
+    justify-content: center;
     margin: 5rem;
     margin: 10rem 0rem;
     font-size: 4rem;
     font-weight: 200;
-    text-align: center;
     position: relative;
 }
-.m1__heading:after{
+
+/*To apply the pseudo element on the heading text only*/
+.m1 span{
+    position: relative;
+}
+.m1__heading span:before{
     content: "";
     position: absolute;
-    height: 3rem;
     width: 16rem;
-    top: 1.2rem;
-    right: 38%;
+    bottom: 0rem;
+    right: -3rem;
+    justify-content: center;
     border-bottom: 1px solid black;
-    transition: .6s;
+    transition: .7s;
+
 }
-.m1__heading:hover{
+/*heading hover style*/
+.m1__heading span:hover{
     transform: scale(1.1);
     transition: .7s;  
 }
-.m1__heading:hover:after{
-    width: 20rem;
-    right: 42%;
+
+/*custom animation for the heading underline*/
+@keyframes m1_heading_animation {
+    0%{
+        width: 16rem;
+    }
+    50%{
+        width: 30rem;
+        right: 0;
+    }
+    100%{
+        width: 21rem;
+    }
 }
+
+
+/*heading hover underline style*/
+.m1__heading span:hover:before{
+    animation: .7s m1_heading_animation;
+    width: 21rem;
+    right: 1rem;
+}
+
+/*STYLE WITH US DESIGN*/
 .m1__content{
-    perspective: 130px;
+    perspective: 130px; /*set the perspective of the elementv*/
 }
+
+/*image styling*/
 .m1__content--img{    
     position: absolute;
     border: 1rem solid #efefef;
-    transform: rotateX(-4deg) rotateY(-8deg) rotateZ(-6deg) translateX(-7px);
+    transform: rotateX(-2deg) rotateY(-6deg) rotateZ(-6deg) translateX(-7px);
     transition: .5s;
-    filter: blur(1px);
+    filter: blur(1px); /*To maek the image blur*/
 }
 .m1__content--img:before {
-  content: " ";
-  position: absolute;
-    width: calc(100% + 1rem);
+    content: " ";
+    position: absolute;
+    width: calc(100% + 1rem); /*calculte the size in the image*/
     height: calc(100% + .9rem);
     transform: translate(-1rem,-1rem);
-  border: .5rem solid black;
+    border: .5rem solid black;
 }
+
+/*make the image come forward*/
 .m1__content--img:hover{
-    transform: scale(1.3);
+    transform: scale(1.3); /* zoom the image*/
     z-index: 99;
-    box-shadow: 0px 0px 500px 1000px rgba(0, 0, 0, 0.08);
-    filter: none;
-/*    box-shadow: ;*/
+    box-shadow: 0px 0px 500px 1000px rgba(0, 0, 0, 0.08); /* make the background dull on imaged hover*/
+    filter: none; /* remove teh filter*/
 }
+
+/*To give bottom shadow to the image*/
  .m1__content--img:after{
     content: "";
     position: absolute;
@@ -161,8 +214,10 @@ main{
     left: 0;
     width: 100%;
     height: 10px;
-     border-radius: 50%;
+    border-radius: 50%;
 }
+
+/* make the bottom shadow visible*/
 .m1__content--img:hover:after{
     background-color: rgba(23, 23, 23, 0.4)!important;
     opacity: .5;
@@ -170,76 +225,99 @@ main{
     transition-delay:.2s;
     transition: .3s;
 }
+
+/*image size*/
 .m1__content img{
     height: 30rem;
     width: 25rem;
 }
-.m1__content--1{
-    left: 3%;
-}
-.m1__content--2{
-    left: 10%;
-}
-.m1__content--3{
-    left: 20%;
-}
-.m1__content--4{
-    left: 30%;
-}
-.m1__content--5{
-    left: 40%;
-}
-.m1__content--6{
-    left: 50%;
-}
-.m1__content--7{
-    left: 60%;
-}
-.m1__content--8{
-    left: 70%;
-}
-.m1__content--9{
-    left: 80%;
-}
-/*
-.m1__content--2{
-    left: 5%;
-}
-.m1__content--3{
-    left: 12%;
-}
-.m1__content--4{
-    left: 18%;
-}
-.m1__content--5{
-    left: 25%;
-}
-.m1__content--6{
-    left: 31%;
-}
-.m1__content--7{
-    left: 38%;
-}
-.m1__content--8{
-    left: 45%;
-}
-.m1__content--9{
-    left: 50%;
-}
-.m1__content--10{
-    left: 55%;
-}
-*/
+
+/*to put the images side by side relatively*/
+.m1__content--1{ left: 6%;  }
+.m1__content--2{ left: 12%; }
+.m1__content--3{ left: 20%; }
+.m1__content--4{ left: 30%; }
+.m1__content--5{ left: 40%; }
+.m1__content--6{ left: 50%; }
+.m1__content--7{ left: 60%; }
+.m1__content--8{ left: 70%; }
+.m1__content--9{ left: 80%; }
+
+/*Part 2 styling*/
+/*GALLERY*/
 .m2{
     padding-top: 1rem;
-    height: 150vh;
-    align-content: center;
+    height: 100rem;
     position: relative;
     background-image: linear-gradient(to right,white 8%, rgba(255, 255, 255, 0.81) 70%,white 90%),url(../images/m2-background.jpg);
     background-attachment: fixed;
 }
+
+/*GALLERY heading*/
+.m2__heading{
+    margin: 5rem;
+    margin: 10rem 0rem;
+    font-size: 4rem;
+    font-weight: 200;
+    text-align: center;
+    position: relative;
+}
+
+.m2__heading span{
+ position: relative;
+}
+
+/*line on left of heading*/
+.m2__heading span:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-top: 1px solid black;
+    border-bottom: 4px solid rgba(0, 0, 0, 0.42);
+    height: 10%;
+    left: -110%;
+    top:50%;
+    transform: translateY(-50%);
+    transition: .7s;
+}
+/*line on left of heading  (on hover)*/
+
+.m2__heading span:hover:before{
+    width: .5rem;
+    border-top: none;
+    border-bottom: none;
+    border-left: 1px solid black;
+    border-right: 4px solid rgba(0, 0, 0, 0.42);
+    height: 100%;
+    left: -50%;
+}
+
+/*line on right of heading*/
+.m2__heading span:after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-top: 4px solid rgba(0, 0, 0, 0.47);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    height: 10%;
+    right: -110%;
+    top:50%;
+    transform: translateY(-50%);
+    transition: .7s;
+}
+.m2__heading span:hover:after{
+    width: .5rem;
+    border-top: none;
+    border-bottom: none;
+    border-left: 4px solid rgba(0, 0, 0, 0.47);
+    border-right: 1px solid rgb(0, 0, 0);
+    height: 100%;
+    right: -50%;
+}
+
+/*Image grid gallery*/
 .m2__content{
-    display: inline-grid;
+    display: grid;
     grid-template-columns: repeat(4,150px);
     grid-template-rows: repeat(4,150px);
     grid-auto-flow: row dense;
@@ -265,51 +343,26 @@ main{
     grid-row-end: span 2;
 }
 
-.m2__heading{
-    margin: 5rem;
-    margin: 10rem 0rem;
-    font-size: 4rem;
-    font-weight: 200;
-    text-align: center;
-    position: relative;
-}
-.m2__heading:before{
-    content: "";
-    position: absolute;
-    width: 40%;
-    border-top: 1px solid black;
-    border-bottom: 4px solid rgba(0, 0, 0, 0.42);
-    height: 10%;
-    left: 0;
-    top:50%;
-    transform: translateY(-50%);
-}
-
-.m2__heading:after{
-    content: "";
-    position: absolute;
-    width: 40%;
-    border-top: 4px solid rgba(0, 0, 0, 0.47);
-    border-bottom: 1px solid rgb(0, 0, 0);
-    height: 10%;
-    right: 0;
-    top:50%;
-    transform: translateY(-50%);
-}
-
+/*Part 3*/
+/*CATEGORIES*/
 .m3{
-     height: 100vh;
+     height: 100rem;
     margin: 0 auto;
 }
+
+/*CATEGORIES HEADING*/
 .m3__heading{
     margin: 5rem;
     margin: 10rem 0rem;
     font-size: 4rem;
     font-weight: 200;
-    text-align: center;
+    display: flex;
+    justify-content: center;
     position: relative;
 }
-.m3__heading:before{
+
+/*line at the bottom of the heading*/
+.m3__heading span:before{
     content: "";
     position: absolute;
     width: 0%;
@@ -321,44 +374,52 @@ main{
     transition: .5s;
 }
 
-.m3__heading:after{
+/*line on right side of the heading*/
+.m3__heading span:after{
     margin-left: 1.2rem;
     content: "";
     position: absolute;
     width: .3rem;
     background-color: rgba(0, 0, 0, 0.68);
-    height: 80%;
+    height: 100%;
     top:50%;
     transform: translateY(-50%);
     transition: .5s;
 }
-.m3__heading:hover:before{
+/*line at the bottom of the heading (on hover)*/
+.m3__heading span:hover:before{
     width: 19rem;
     height: .2rem;
     top:100%;
-    background-color: black;
 }
-.m3__heading:hover:after{
-    background-color: black;
+/*line on right side of the heading (on hover)*/
+
+.m3__heading span:hover:after{
     height: 0rem;
-    top:0%;
-/*   right: 20rem;*/
+    top:0;
 }
+
+/*Rotating card*/
+/*card frame*/
 .card{
     margin: 0 auto;
-  perspective: 150rem;
-  -moz-perspective: 150rem;
+    perspective: 150rem;
+    -moz-perspective: 150rem;
     width: 62rem;
     position: relative;
     height: 41rem;
     
 }    
+
+/*front side of the card*/
 .card_front{
     height: 100%;
-    transition: all .8s ease;    
-    backface-visibility: hidden;
+    transition: all .8s ease-in;    
+    backface-visibility: hidden; /* to hide the back of card when rotating*/
     position: absolute;
 }
+
+/*front side card image*/
 .card_front img{
     height: 100%;
     z-index: 4;
@@ -380,19 +441,23 @@ main{
     
 }
 
+/*Back side of the card*/
 .card_back{
     height: 100%;
     position: absolute;
-    transform: rotateY(-180deg);
-    backface-visibility: hidden;
-    transition: all .8s ease;    color: white;
-    text-transform: uppercase;
+    transform: rotateY(-180deg); /* make back card initially rotated*/
+    backface-visibility: hidden; /* to hide the back of card when rotating*/
+    transition: all .8s ease-in;    
+    color: white;
+    text-transform: uppercase; /* make all the text uppercase*/
     
 }
+
+/*back side card image*/
 .card_back img{
     height: 100%;
     z-index: 4;
-    filter: blur(3px) brightness(50%);
+    filter: blur(3px) brightness(50%); /*applying differnt filters on image*/
 }
 .cart_back--text{
     position: absolute;
